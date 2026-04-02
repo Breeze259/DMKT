@@ -470,7 +470,10 @@ class WorkingMemoryTransfer(nn.Module):
         """动态创建距离矩阵 d(t,τ) = |t-τ|"""
         t_indices = torch.arange(seq_len, device=device).unsqueeze(1)  # (L, 1)
         tau_indices = torch.arange(seq_len, device=device).unsqueeze(0)  # (1, L)
-        return torch.abs(t_indices - tau_indices)  # (L, L)
+        distance = torch.abs(t_indices - tau_indices)  # (L, L)
+        causal_mask = tau_indices > t_indices  # (L, L)，上三角为True（不含对角线）
+        distance.masked_fill_(causal_mask, float('inf'))
+        return distance
     
     def forward(self, conv_outputs, actual_seq_len):
         """
