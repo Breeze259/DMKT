@@ -21,3 +21,36 @@ Abstract
 	framework, which simulates selective focus and multi-scale memory integration, effectively 
 	advances knowledge tracing towards a more cognitively aligned paradigm.
 	
+
+# DMKT
+
+1. Environment Setup
+
+Install the required dependencies:
+
+pip install numpy torch torchvision torchaudio scikit-learn pytorch_tools
+
+
+2. Dataset Preparation
+Download the dataset from the link provided in the paper. Process the raw data into the following format:
+
+	number of questions
+	concept per line
+    answer per line
+
+After processing, split the dataset into training and testing sets with the following naming convention:
+
+    Training set: {dataset_name}_train_0.csv
+    Testing set: {dataset_name}_test_0.csv
+
+Place both files in your designated data directory.
+
+
+3. Configuration
+Update the data path in your configuration or script to point to the directory containing the processed dataset files.
+
+
+4. Training
+Once the environment is set up and the dataset paths are configured, start training by running:
+```bash
+python DMKT_run-.py
